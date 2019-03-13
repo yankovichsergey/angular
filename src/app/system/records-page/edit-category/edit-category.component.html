@@ -1,0 +1,79 @@
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-header bordered">
+            <div class="header-block">
+                <h3 class="title">Редактировать категорию</h3>
+            </div>
+        </div>
+        <div class="card-block">
+            <div class="alert alert-{{message.type}}"
+                 *ngIf="message.text"
+                 @fade
+            >{{message.text}}</div>
+            <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                <div class="form-group">
+                    <label class="control-label" for="e-category-category">Выберите категорию</label>
+                    <select
+                            class="form-control"
+                            id="e-category-category"
+                            [(ngModel)]="currentCtegoryId"
+                            (change)="onCategoryChange()"
+                            [ngModelOptions]="{standalone: true}"
+                    >
+                        <option
+                                *ngFor="let c of categories"
+                                [value]="c.id"
+                        >{{c.name}}</option>
+                    </select>
+                </div>
+                <div
+                        class="form-group"
+                        [ngClass]="{'has-error':categoryName.invalid && categoryName.touched}"
+                >
+                    <label class="control-label" for="e-category-name">Введите название</label>
+                    <input
+                            type="text"
+                            id="e-category-name"
+                            class="form-control"
+                            required
+                            #categoryName="ngModel"
+                            name="categoryName"
+                            [ngModel]="currentCategory.name"
+                    >
+                    <span
+                            class="form-help-text"
+                            *ngIf="categoryName.invalid && categoryName.touched"
+                    >Название категории не может быть пустым</span>
+                </div>
+                <div
+                        class="form-group"
+                        [ngClass]="{'has-error':categoryValue.invalid && categoryValue.touched}"
+
+                >
+                    <label class="control-label" for="e-category-value">Введите лимит</label>
+                    <input
+                            type="number"
+                            id="e-category-value"
+                            class="form-control"
+                            [ngModel]="currentCategory.capacity"
+                            #categoryValue="ngModel"
+                            name="categoryValue"
+                            required
+                            min="1"
+
+                    >
+                    <span
+                            class="form-help-text"
+                            *ngIf="categoryValue.invalid && categoryValue.touched"
+                    >Поле не может быть пустым.</span>
+                </div>
+                <button
+                        type="submit"
+                        class="btn btn-primary"
+                        [disabled]="form.invalid"
+                >Редактировать
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Домашняя бухгалтерия</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
+    <script>
+        const config = {
+            apiKey: "AIzaSyBmhE6eJy2QNGD1gx1j4hsKZhJGQH_4gHk",
+            authDomain: "kurs-690e7.firebaseapp.com",
+            databaseURL: "https://kurs-690e7.firebaseio.com/",
+            projectId: "kurs-690e7",
+            storageBucket: "kurs-690e7.appspot.com",
+        };
+        firebase.initializeApp(config);
+
+        var ref = firebase.database().ref();
+        ref.on("value", function (snapshot) {
+            output.innerHTML = JSON.stringify(snapshot.val(), null, 2);
+        });
+    </script>
+</head>
+<body>
+<app-root></app-root>
+</body>
+</html>
